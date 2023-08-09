@@ -12,9 +12,10 @@ app.listen(3000, () => {
 
 app.get('/getTotalViewCount', async (req, res) => {
   try {
-    const searchKeyword = req.body || 'dubai';
-    console.log(searchKeyword.searchKeyword);
-    let totalViewCount = await getSearchVolume(searchKeyword.searchKeyword);
+    // const searchKeyword = req.body || 'dubai';
+    const searchKeyword = req.query.searchKeyword || 'dubai'; // Use the query parameter, default to 'dubai'
+    console.log(searchKeyword);
+    let totalViewCount = await getSearchVolume(searchKeyword);
     res.json({ totalViewCount });
   } catch (err) {
     console.log(err);
