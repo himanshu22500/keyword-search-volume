@@ -1,30 +1,33 @@
 const { google } = require("googleapis");
-const express = require('express');
+const express = require("express");
+require("dotenv").config();
+const cors = require("cors");
+
+const apiKey = process.env.YOUTUBE_API_KEY;
 const app = express();
-const cors = require('cors');
 
 app.use(express.json());
 app.use(cors());
 
 app.listen(3000, () => {
-  console.log('Server is listening on port http://localhost:3000/');
+  console.log("Server is listening on port http://localhost:3000/");
 });
 
-app.get('/getTotalViewCount', async (req, res) => {
+app.get("/getTotalViewCount", async (req, res) => {
   try {
     // const searchKeyword = req.body || 'dubai';
-    const searchKeyword = req.query.searchKeyword || 'dubai'; // Use the query parameter, default to 'dubai'
+    const searchKeyword = req.query.searchKeyword || "dubai"; // Use the query parameter, default to 'dubai'
     console.log(searchKeyword);
     let totalViewCount = await getSearchVolume(searchKeyword);
     res.json({ totalViewCount });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: 'An error occurred' });
+    res.status(500).json({ error: "An error occurred" });
   }
 });
 
 const getSearchVolume = async (searchKeyword) => {
-  const apiKey = "AIzaSyB5UobEBgOMSqjKALU0o5kY36Y8Obp4itQ";
+  const apiKey = apiKey;
   const youtube = google.youtube({
     version: "v3",
     auth: apiKey,
@@ -66,10 +69,8 @@ const getSearchVolume = async (searchKeyword) => {
   }
 
   const ans = calculateMedian(videoViews);
-
   return ans;
 };
-
 
 function calculateMedian(arr) {
   arr.sort((a, b) => a - b);
