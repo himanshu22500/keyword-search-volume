@@ -15,8 +15,7 @@ app.listen(3000, () => {
 
 app.get("/getTotalViewCount", async (req, res) => {
   try {
-    // const searchKeyword = req.body || 'dubai';
-    const searchKeyword = req.query.searchKeyword || "dubai"; // Use the query parameter, default to 'dubai'
+    const searchKeyword = req.query.searchKeyword || "dubai";
     console.log(searchKeyword);
     let totalViewCount = await getSearchVolume(searchKeyword);
     res.json({ totalViewCount });
@@ -27,7 +26,6 @@ app.get("/getTotalViewCount", async (req, res) => {
 });
 
 const getSearchVolume = async (searchKeyword) => {
-  const apiKey = apiKey;
   const youtube = google.youtube({
     version: "v3",
     auth: apiKey,
