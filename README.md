@@ -94,5 +94,3 @@ This function calculates the median value of an array of numbers.
   - The calculated median value.
 
 ---
-
-Feel free to use, modify, and enhance this server code to meet your specific requirements. Make sure to handle errors, rate limiting, and other considerations when using APIs in a production environment.
